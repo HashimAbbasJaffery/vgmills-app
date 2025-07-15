@@ -3,8 +3,26 @@ import 'package:flutter/widgets.dart';
 import 'package:vgmills/constants/Colors.dart';
 import 'package:vgmills/widgets/Logo.dart';
 import 'package:vgmills/widgets/SearchArea.dart';
+import 'package:vgmills/widgets/SearchDrawer.dart';
 
-class Header extends StatelessWidget {
+class Header extends StatefulWidget {
+
+  Function(String) changeKeyword;
+  Header(this.changeKeyword);  
+
+  @override
+  State<Header> createState() => _HeaderState();
+}
+
+class _HeaderState extends State<Header> {
+  bool is_drawer_open = false;
+
+  void toggleDrawer() {
+    setState(() {
+      is_drawer_open = !is_drawer_open;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,7 +37,19 @@ class Header extends StatelessWidget {
       child: Column(
         children: [
           Logo(),
-          SearchArea()
+          Stack(
+            clipBehavior: Clip.none,
+            children: [
+              SearchArea(toggleDrawer),
+              Container(
+                child: Positioned(
+                  right: 80,
+                  top: 10,
+                  child: is_drawer_open ? SearchDrawer() : Text("")
+                ),
+              )
+            ],
+          )
         ],
       ),
     );
