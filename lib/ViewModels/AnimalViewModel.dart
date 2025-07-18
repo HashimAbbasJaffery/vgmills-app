@@ -7,6 +7,7 @@ class Animalviewmodel with ChangeNotifier {
   String? next_page_url = "";
   String? errorMessage;
   bool loading = false;
+  bool is_loading_more = false;
 
   Future init() async {
     loading = true;
@@ -26,6 +27,9 @@ class Animalviewmodel with ChangeNotifier {
   }
 
   Future next() async {
+    is_loading_more = true;
+    notifyListeners();
+
     try {
       if(next_page_url != null) {
         var data = await animalModel.loadAnimalFromUrl(url: next_page_url.toString());
@@ -36,15 +40,30 @@ class Animalviewmodel with ChangeNotifier {
       print(e);
     }
 
+    is_loading_more = false;
     notifyListeners();
   }
 
-  Future search(keyword) async {
+  Future search({ 
+    keyword = "",
+    min = "",
+    max = "",
+    breed = "",
+    age = "",
+    gender = ""
+  }) async {
     loading = true;
     notifyListeners();
 
     try {
-      var data = await animalModel.loadAnimalFromSever(keyword: keyword);
+      var data = await animalModel.loadAnimalFromSever(
+        keyword: keyword,
+        min: min,
+        max: max,
+        breed: breed,
+        age: age,
+        gender: gender
+      );
       animals = data[0];
       next_page_url = data[1];
     } catch(e) {

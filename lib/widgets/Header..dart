@@ -41,13 +41,6 @@ class _HeaderState extends State<Header> {
             clipBehavior: Clip.none,
             children: [
               SearchArea(toggleDrawer),
-              Container(
-                child: Positioned(
-                  right: 80,
-                  top: 10,
-                  child: is_drawer_open ? SearchDrawer() : Text("")
-                ),
-              )
             ],
           )
         ],

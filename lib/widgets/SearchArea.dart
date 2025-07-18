@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:vgmills/ViewModels/AnimalViewModel.dart';
+import 'package:vgmills/ViewModels/DrawerData.dart';
 import 'package:vgmills/utils/Debouncer.dart';
 
 class SearchArea extends StatelessWidget {
   var _inputController = TextEditingController();
+
   Function() toggleDrawer;
   SearchArea(this.toggleDrawer);
 
   @override
   Widget build(BuildContext context) {
-
+    final provider = Provider.of<DrawerData>(context);
     var viewModel = Provider.of<Animalviewmodel>(context);
     final _debouncer = Debouncer(milliseconds: 300);
 
@@ -31,7 +33,8 @@ class SearchArea extends StatelessWidget {
                 child: TextField(
                   onChanged: (value) => {
                     _debouncer.run(() => {
-                      viewModel.search(value)
+                      viewModel.search(keyword: value),
+                      provider.setKeyword(value)
                     })
                   },
                   controller: _inputController,
@@ -53,7 +56,7 @@ class SearchArea extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () => {
-                toggleDrawer()
+                provider.toggleFilters()
               },
               child: Container(
                 height: 47,

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:vgmills/ViewModels/AnimalViewModel.dart';
+import 'package:vgmills/constants/Colors.dart';
 import 'package:vgmills/widgets/Animal.dart';
+import 'package:vgmills/widgets/AnimalsSkeletonLoading.dart';
 
 class Animals extends StatefulWidget {
   @override
@@ -35,26 +37,62 @@ class _AnimalsState extends State<Animals> {
   @override
   Widget build(BuildContext context) {
     final viewModel = Provider.of<Animalviewmodel>(context);
-
     if(viewModel.loading) {
-      return Center(
-        child: CircularProgressIndicator(),
-      );
+        return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
+      child: Column(
+        spacing: 20,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+            child: Animalsskeletonloading(),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+            child: Animalsskeletonloading(),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+            child: Animalsskeletonloading(),
+          ),
+        ],
+      ),
+    );
+  
     } else {
-      return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-        child: ListView.builder(
-          controller: _scrollController,
-          itemCount: viewModel.animals.length,
-          itemBuilder: (context, index) {
-            return Column(
-              children: [
-                Animal(viewModel.animals[index]),
-                SizedBox(height: 20),
-              ],
-            );
-          },
-        ),
+      return Column(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+              child: ListView.builder(
+                controller: _scrollController,
+                itemCount: viewModel.animals.length,
+                itemBuilder: (context, index) {
+                  return Column(
+                    children: [
+                      Animal(viewModel.animals[index]),
+                      SizedBox(height: 20),
+                      if(index == viewModel.animals.length - 1 && viewModel.next_page_url != null) 
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: cow_id_color
+                          ),
+                          onPressed: () => {}, 
+                          child: Text(
+                            style: TextStyle(
+                              color: Colors.white
+                            ),
+                            viewModel.is_loading_more ? "Loading" : "Load More"
+                          )
+                        )
+                    ],
+                  );
+                },
+              ),
+            ),
+          ),
+        ],
       );
     }
   }
