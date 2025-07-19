@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:vgmills/constants/Colors.dart';
+import 'package:vgmills/screens/Animal.dart';
 import 'package:vgmills/screens/Home.dart';
 
 void main() {
@@ -34,7 +36,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String keyword = "";
-
+  
   void changeKeyword(value) {
     setState(() {
       keyword = value;
@@ -44,7 +46,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Home(changeKeyword)
+      // body: Home(changeKeyword),
+      body: Animal(),
     );
   }
 }

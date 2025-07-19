@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:vgmills/ViewModels/AnimalViewModel.dart';
 import 'package:vgmills/ViewModels/CategoriesViewModel.dart';
@@ -9,9 +12,16 @@ import 'package:vgmills/widgets/Animals.dart';
 import 'package:vgmills/widgets/Header..dart';
 import 'package:vgmills/widgets/SearchDrawer.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   Function(String) changeKeyword;
   Home(this.changeKeyword);
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +38,7 @@ class Home extends StatelessWidget {
           children: [
             Column(
               children: [
-                Header(changeKeyword),
+                Header(widget.changeKeyword),
                 Expanded(child: Animals()),
   
               ],
