@@ -1,7 +1,14 @@
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:vgmills/models/Animal.dart';
+import 'package:intl/intl.dart';
 
 class AnimalInformation extends StatelessWidget {
+
+  Map<dynamic, dynamic> animal;
+  AnimalInformation({ required this.animal });
+  final currency = NumberFormat.currency(locale: 'en_PK', symbol: 'PKR ');
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -10,16 +17,16 @@ class AnimalInformation extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Justin bieber",
+                        animal["name"],
                         style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold
                         ),
                       ),
                       Text(
-                        "PKR 1,000,000/-",
+                        currency.format(animal["price"]),
                         style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold
                         ),
                       ),
@@ -28,7 +35,7 @@ class AnimalInformation extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "420kg live weight",
+                            animal["live_weight"].toString() + "kg live weight",
                             style: TextStyle(
                               fontSize: 16
                             ),

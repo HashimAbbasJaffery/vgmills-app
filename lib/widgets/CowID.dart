@@ -3,6 +3,10 @@ import 'package:flutter/widgets.dart';
 import 'package:vgmills/constants/Colors.dart';
 
 class CowID extends StatelessWidget {
+
+  int id;
+  CowID({ required this.id });
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,7 +28,7 @@ class CowID extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                     color: Colors.white
                   ),
-                  "ID: 123-123-123",
+                  "ID: " + id.toString(),
                 ),
               ),
             );

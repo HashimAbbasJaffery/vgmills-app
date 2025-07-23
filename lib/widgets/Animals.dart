@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:vgmills/ViewModels/AnimalViewModel.dart';
 import 'package:vgmills/constants/Colors.dart';
+import 'package:vgmills/screens/Animal.dart';
 import 'package:vgmills/widgets/Animal.dart';
 import 'package:vgmills/widgets/AnimalsSkeletonLoading.dart';
 
@@ -71,7 +72,14 @@ class _AnimalsState extends State<Animals> {
                 itemBuilder: (context, index) {
                   return Column(
                     children: [
-                      Animal(viewModel.animals[index]),
+                      GestureDetector(
+                        onTap: () => {
+                          Navigator.push(context, MaterialPageRoute(
+                            builder: (context) => AnimalScreen(animal: viewModel.animals[index])
+                          ))
+                        },
+                        child: Animal(viewModel.animals[index]),
+                      ),
                       SizedBox(height: 20),
                       if(index == viewModel.animals.length - 1 && viewModel.next_page_url != null) 
                         ElevatedButton(

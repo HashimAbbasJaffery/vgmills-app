@@ -3,6 +3,9 @@ import 'package:flutter/widgets.dart';
 import 'package:vgmills/constants/Colors.dart';
 
 class CoverImages extends StatelessWidget {
+
+  Map<dynamic, dynamic> animal;
+  CoverImages({ required this.animal });
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -15,7 +18,8 @@ class CoverImages extends StatelessWidget {
                         enlargeCenterPage: false,
                       ),
                       items: [
-                        "https://vgmills.farm/cattle/storage/uploads/681e5b9ac8ada.png",
+                        "https://vgmills.farm/cattle/storage/" + animal["front_image"],
+                        "https://vgmills.farm/cattle/storage/" + animal["back_image"],
                       ].map((url) {
                         return Builder(
                           builder: (BuildContext context) {

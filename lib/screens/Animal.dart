@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:vgmills/constants/Colors.dart';
+import 'package:vgmills/widgets/AdditionalInfo.dart';
 import 'package:vgmills/widgets/AnimalCharacterstics.dart';
 import 'package:vgmills/widgets/AnimalInformation.dart';
 import 'package:vgmills/widgets/CoverImages.dart';
@@ -8,14 +9,19 @@ import 'package:vgmills/widgets/CowBasicInfo.dart';
 import 'package:vgmills/widgets/CowID.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:vgmills/widgets/Disclaimers.dart';
+import 'package:vgmills/widgets/Footer.dart';
 import 'package:vgmills/widgets/InstallmentBadge.dart';
 
-class Animal extends StatefulWidget {
+class AnimalScreen extends StatefulWidget {
+
+  Map<dynamic, dynamic> animal;
+  AnimalScreen({ required this.animal });
+
   @override
-  State<Animal> createState() => _AnimalState();
+  State<AnimalScreen> createState() => _AnimalState();
 }
 
-class _AnimalState extends State<Animal> {
+class _AnimalState extends State<AnimalScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -24,34 +30,14 @@ class _AnimalState extends State<Animal> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            CoverImages(),
-            CowID(),
+            CoverImages(animal: widget.animal),
+            CowID(id: widget.animal["id"]),
             Expanded(
               child: ListView(
                 children: [
-                  Cowbasicinfo(),
-                  Row(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(
-                          top: 20
-                        ),
-                        padding: EdgeInsets.fromLTRB(20, 20, 25, 0),
-                        width: MediaQuery.of(context).size.width * 0.55,
-                        color: Color(0xFFf9f4ec),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          spacing: 7,
-                          children: [
-                            Animalcharacterstics(character_key: "Breed", character_value: "Brahmand"),
-                            Animalcharacterstics(character_key: "Gender", character_value: "Female"),
-                            Animalcharacterstics(character_key: "Age", character_value: "3 Teeth"),
-                            Disclaimers()
-                          ],
-                        ),
-                      )
-                    ],
-                  )
+                  Cowbasicinfo(animal: widget.animal),
+                  AdditionalInfo(animal: widget.animal),
+                  Footer(),
                 ],
               ),
             )

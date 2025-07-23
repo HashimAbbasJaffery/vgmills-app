@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:vgmills/constants/Colors.dart';
 import 'package:vgmills/screens/Animal.dart';
 import 'package:vgmills/screens/Home.dart';
 
 void main() {
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      statusBarColor: primary,
+      statusBarIconBrightness: Brightness.light, // Icon color: white
+    )
+  );
   runApp(const MyApp());
 }
 
@@ -46,8 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // body: Home(changeKeyword),
-      body: Animal(),
+      body: Home(changeKeyword),
     );
   }
 }
