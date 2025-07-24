@@ -37,7 +37,7 @@ class _AnimalState extends State<AnimalScreen> {
                 children: [
                   Cowbasicinfo(animal: widget.animal),
                   AdditionalInfo(animal: widget.animal),
-                  Footer(),
+                  Footer(animal: widget.animal),
                 ],
               ),
             )

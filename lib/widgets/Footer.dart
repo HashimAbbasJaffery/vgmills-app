@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:vgmills/constants/Colors.dart';
+import 'package:vgmills/widgets/BottomSheetUI.dart';
 
 class Footer extends StatelessWidget {
+
+  Map<dynamic, dynamic> animal;
+
+  Footer({ required this.animal });
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,7 +28,20 @@ class Footer extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: cow_id_color,
                     ),
-                    onPressed: () => {}, 
+                    onPressed: () => {
+
+                      showModalBottomSheet(
+                          context: context,
+                          builder: (BuildContext build) {
+                            return Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                              child: SizedBox(
+                                child: BottomSheetUI(animal: animal),
+                              )
+                            );
+                          }
+                      )
+                    },
                     child: Text(
                       style: TextStyle(
                         color: Colors.white
