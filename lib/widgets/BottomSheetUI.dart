@@ -2,13 +2,15 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 import 'package:vgmills/constants/Colors.dart';
 
 class BottomSheetUI extends StatefulWidget {
 
   final Map<dynamic, dynamic> animal;
+  final bool is_delivery;
 
-  BottomSheetUI({ required this.animal });
+  BottomSheetUI({ required this.animal, this.is_delivery = false });
 
   @override
   State<BottomSheetUI> createState() => _BottomSheetUIState();
@@ -46,6 +48,8 @@ class _BottomSheetUIState extends State<BottomSheetUI> {
 
   @override
   Widget build(BuildContext context) {
+    final currency = NumberFormat.currency(locale: 'en_PK', symbol: 'PKR ');
+
 
     return ListView(
       children: [
@@ -152,17 +156,18 @@ class _BottomSheetUIState extends State<BottomSheetUI> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text("Cash:"),
-            Text("PKR " + widget.animal["price"].toString() + "/-")
+            Text(currency.format(widget.animal["price"]) + "/-")
           ],
         ),
 
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text("Maintenance Fee Per Month:"),
-            Text("PKR " + widget.animal["maintenance_fee"].toString() + "/-")
+            Text(widget.is_delivery == true ? "Delivery Charges:" : "Maintenance Fee Per Month:"),
+            Text(currency.format(widget.animal["maintenance_fee"]) + "/-")
           ],
         ),
+
         SizedBox(height: 10,),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -173,12 +178,20 @@ class _BottomSheetUIState extends State<BottomSheetUI> {
                 ),
                 "Total:"
             ),
-            Text(
-                style: TextStyle(
-                    fontWeight: FontWeight.bold
-                ),
-                "PKR " + (eids.values.where((eid) => eid.eidYear == selectedEid).first.months * widget.animal["maintenance_fee"] + widget.animal["price"]).toString() + "/-"
-            )
+            if(widget.is_delivery == false)
+              Text(
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold
+                  ),
+                  "PKR " + currency.format((eids.values.where((eid) => eid.eidYear == selectedEid).first.months * widget.animal["maintenance_fee"] + widget.animal["price"])) + "/-"
+              )
+            else
+              Text(
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold
+                  ),
+                  "PKR " + currency.format((30000 + widget.animal["price"])) + "/-"
+              )
           ],
         ),
 

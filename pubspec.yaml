@@ -35,6 +35,7 @@ dependencies:
   intl: 
   shimmer: 
   pluralize: ^0.0.8
+  url_launcher: ^6.2.5
   internet_connection_checker_plus:
   carousel_slider: ^5.1.1
   font_awesome_flutter: ^10.5.0
