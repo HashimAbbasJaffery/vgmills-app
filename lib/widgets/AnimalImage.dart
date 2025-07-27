@@ -12,6 +12,19 @@ class AnimalImage extends StatelessWidget {
     return Column(
         children: [
           Image.network(
+            loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loading) {
+                if(loading == null) {
+                  return child;
+                } else {
+                  return Container(
+                      width: 140,
+                      height: 100,
+                      child: CircularProgressIndicator(
+                        padding: EdgeInsets.all(50),
+                      )
+                  );
+                }
+            },
             width: 140,
             "https://vgmills.farm/cattle/storage/" + animal["front_image"]
           ),

@@ -27,6 +27,29 @@ class _AnimalState extends State<AnimalScreen> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Color(0xFFe9e4db),
+        appBar: AppBar(
+          backgroundColor: cow_id_color,
+          toolbarHeight: 30,
+          leading: GestureDetector(
+            onTap: () => {
+              Navigator.of(context).pop()
+            },
+            child: Row(
+              children: [
+                Icon(
+                    color: Colors.white,
+                    Icons.arrow_left
+                ),
+                Text(
+                    style: TextStyle(
+                        color: Colors.white
+                    ),
+                    "Back"
+                )
+              ],
+            ),
+          )
+        ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [

@@ -20,9 +20,9 @@ class _CategoryFiltersState extends State<CategoryFilters> {
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: Column(
         children: [
-          CategoryFilter(category: "Breed"),
-          provider.is_category_drawer_open.isEmpty || provider.is_category_drawer_open == "Age" || provider.is_category_drawer_open == "Gender" ? CategoryFilter(category: "Age") : SizedBox.shrink(),
-          provider.is_category_drawer_open.isEmpty || provider.is_category_drawer_open == "Gender" ? CategoryFilter(category: "Gender") : SizedBox.shrink()
+          CategoryFilter(category: "Breed", label: provider.breed),
+          provider.is_category_drawer_open.isEmpty || provider.is_category_drawer_open == "Age" || provider.is_category_drawer_open == "Gender" ? CategoryFilter(category: "Age", label: provider.age,) : SizedBox.shrink(),
+          provider.is_category_drawer_open.isEmpty || provider.is_category_drawer_open == "Gender" ? CategoryFilter(category: "Gender", label: provider.gender,) : SizedBox.shrink()
         ],
       ),
     );

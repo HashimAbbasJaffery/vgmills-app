@@ -1,21 +1,28 @@
+import 'dart:io';
+
 import 'package:url_launcher/url_launcher.dart';
 
 class Whatsapp {
-  void open(String whatsappNumber) async {
-    final url = Uri.parse("https://wa.me/$whatsappNumber");
+  void open(String contact) async {
+    // String androidUrl = "whatsapp://send?phone=$contact";
+    String androidUrl = "https://google.com";
+    String iosUrl = "https://wa.me/$contact";
 
+    String webUrl = 'https://api.whatsapp.com/send/?phone=$contact';
 
     try {
-      if (await canLaunchUrl(url)) {
-        await launchUrl(url, mode: LaunchMode.externalApplication);
+      if (Platform.isIOS) {
+        if (await canLaunchUrl(Uri.parse(iosUrl))) {
+          await launchUrl(Uri.parse(iosUrl), mode: LaunchMode.externalApplication);
+        }
       } else {
-        print("❌ WhatsApp cannot be launched. URL is not supported: $url");
-        throw "Could not launch WhatsApp";
+        if (await canLaunchUrl(Uri.parse(androidUrl))) {
+          await launchUrl(Uri.parse(androidUrl), mode: LaunchMode.externalApplication);
+        }
       }
-    } catch (e, stackTrace) {
-      print("❌ Exception occurred while launching WhatsApp:");
-      print("Error: $e");
-      print("Stack Trace: $stackTrace");
+    } catch(e) {
+      print('object');
+      await launchUrl(Uri.parse(webUrl), mode: LaunchMode.externalApplication);
     }
   }
 }

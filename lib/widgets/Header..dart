@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 import 'package:vgmills/constants/Colors.dart';
 import 'package:vgmills/widgets/Logo.dart';
 import 'package:vgmills/widgets/SearchArea.dart';
 import 'package:vgmills/widgets/SearchDrawer.dart';
+
+import 'package:vgmills/ViewModels/CategoriesViewModel.dart';
 
 class Header extends StatefulWidget {
 
@@ -25,6 +28,9 @@ class _HeaderState extends State<Header> {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<CategoriesViewModel>(context);
+    provider.loadAll();
+
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(

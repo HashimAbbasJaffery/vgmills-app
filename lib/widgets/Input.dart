@@ -30,6 +30,9 @@ class Input extends StatelessWidget {
           },
           cursorHeight: 15,
           textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 12
+          ),
           decoration: InputDecoration(
             border: InputBorder.none,
             hintStyle: TextStyle(

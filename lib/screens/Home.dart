@@ -38,7 +38,8 @@ class _HomeState extends State<Home> {
           children: [
             Column(
               children: [
-                Header(widget.changeKeyword),
+                if(MediaQuery.of(context).size.width < MediaQuery.of(context).size.height)
+                  Header(widget.changeKeyword),
                 Expanded(child: Animals()),
   
               ],

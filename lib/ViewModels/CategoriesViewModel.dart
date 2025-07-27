@@ -16,6 +16,12 @@ class CategoriesViewModel with ChangeNotifier {
   };
 
 
+  void loadAll() {
+    getCategories("Breed");
+    getCategories("Age");
+    getCategories("Gender");
+  }
+
   Future getCategories(String category) async {
     final pluralize = Pluralize();
     try {

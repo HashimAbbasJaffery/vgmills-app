@@ -18,8 +18,7 @@ class Categorylist extends StatelessWidget {
     
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
-      child: Positioned(
-        child: Container(
+      child: Container(
           decoration: BoxDecoration(
             border: Border.all(
               color: Color(0xFF7f7f7f)
@@ -38,7 +37,6 @@ class Categorylist extends StatelessWidget {
             ),
           ),
         )
-      ),
-    );
+      );
   }
 }

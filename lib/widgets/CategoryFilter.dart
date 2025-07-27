@@ -8,8 +8,9 @@ import 'package:vgmills/widgets/Utils/ShowIf.dart';
 class CategoryFilter extends StatelessWidget {
 
   final String category;
+  final String label;
   
-  CategoryFilter({ required this.category });
+  CategoryFilter({ required this.category, required this.label });
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class CategoryFilter extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(category),
+                  Text(label.isEmpty ? category : label),
                   Icon(Icons.arrow_right)
                 ],
               ),
